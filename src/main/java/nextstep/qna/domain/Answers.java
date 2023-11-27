@@ -1,5 +1,6 @@
 package nextstep.qna.domain;
 
+import nextstep.qna.exception.CannotDeleteException;
 import nextstep.users.domain.NsUser;
 
 import java.util.ArrayList;
@@ -33,8 +34,10 @@ public class Answers {
         }
     }
 
-    public void deleteByUser(NsUser user) {
-        delete();
+    public void deleteByUser(NsUser user) throws CannotDeleteException {
+        for (Answer answer : answers) {
+            answer.deleteByUser(user);
+        }
     }
 
     @Override
