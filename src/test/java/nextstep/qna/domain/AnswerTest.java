@@ -29,4 +29,14 @@ public class AnswerTest {
         assertThat(answer.isDeleted()).isTrue();
     }
 
+    @Test
+    @DisplayName("질문자와 답변자가 다른 경우 예외를 반환한다.")
+    void 질문자와_답변자가_다르면_예외반환() {
+        Question question = Question.of(NsUserTest.JAVAJIGI, "title1", "contents1");
+        Answer answer = Answer.of(NsUserTest.JAVAJIGI, question, "Answers Contents1");
+
+        assertThatThrownBy(() -> answer.deleteByUser(NsUserTest.SANJIGI))
+                .isInstanceOf(CannotDeleteException.class);
+    }
+
 }
