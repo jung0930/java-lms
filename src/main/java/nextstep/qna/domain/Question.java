@@ -23,10 +23,10 @@ public class Question {
 
     private LocalDateTime updatedDate;
 
-    public Question() {
+    private Question() {
     }
 
-    public Question(NsUser writer, String title, String contents) {
+    private Question(NsUser writer, String title, String contents) {
         this(0L, writer, title, contents);
     }
 
@@ -35,6 +35,10 @@ public class Question {
         this.writer = writer;
         this.title = title;
         this.contents = contents;
+    }
+
+    public static Question of(NsUser writer, String title, String contents) {
+        return new Question(writer, title, contents);
     }
 
     public Long getId() {
