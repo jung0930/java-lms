@@ -23,10 +23,10 @@ public class Answer {
 
     private LocalDateTime updatedDate;
 
-    public Answer() {
+    private Answer() {
     }
 
-    public Answer(NsUser writer, Question question, String contents) {
+    private Answer(NsUser writer, Question question, String contents) {
         this(null, writer, question, contents);
     }
 
