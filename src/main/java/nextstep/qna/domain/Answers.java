@@ -28,6 +28,10 @@ public class Answers {
         answers.add(answer);
     }
 
+    public int size() {
+        return answers.size();
+    }
+
     public void delete() {
         for (Answer answer : answers) {
             answer.delete();
