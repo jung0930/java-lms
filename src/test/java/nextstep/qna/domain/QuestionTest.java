@@ -33,4 +33,13 @@ public class QuestionTest {
                 .isInstanceOf(CannotDeleteException.class);
     }
 
+    @Test
+    @DisplayName("질문에 답변을 추가할 수 있다.")
+    void 질문_답변_추가() {
+        Q1.writeAnswer(AnswerTest.A1);
+        Q1.writeAnswer(AnswerTest.A2);
+
+        assertThat(Q1.sizeOfAnswers()).isEqualTo(2);
+    }
+
 }

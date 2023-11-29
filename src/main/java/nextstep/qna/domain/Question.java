@@ -17,7 +17,9 @@ public class Question {
 
     private NsUser writer;
 
-    private List<Answer> answers = new ArrayList<>();
+    private List<Answer> answerList = new ArrayList<>();
+
+    private Answers answers;
 
     private boolean deleted = false;
 
@@ -37,6 +39,7 @@ public class Question {
         this.writer = writer;
         this.title = title;
         this.contents = contents;
+        this.answers = Answers.init();
     }
 
     public static Question of(NsUser writer, String title, String contents) {
@@ -71,7 +74,7 @@ public class Question {
 
     public void addAnswer(Answer answer) {
         answer.toQuestion(this);
-        answers.add(answer);
+        answerList.add(answer);
     }
 
     public boolean isOwner(NsUser loginUser) {
@@ -87,8 +90,8 @@ public class Question {
         return deleted;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
+    public List<Answer> getAnswerList() {
+        return answerList;
     }
 
     public void delete() {
@@ -102,6 +105,14 @@ public class Question {
         delete();
     }
 
+    public void writeAnswer(Answer answer) {
+        answers.add(answer);
+    }
+
+    public int sizeOfAnswers() {
+        return answers.size();
+    }
+
     @Override
     public String toString() {
         return "Question [id=" + getId() + ", title=" + title + ", contents=" + contents + ", writer=" + writer + "]";
@@ -112,13 +123,12 @@ public class Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
-        return deleted == question.deleted && Objects.equals(id, question.id) && Objects.equals(title, question.title) && Objects.equals(contents, question.contents) && Objects.equals(writer, question.writer) && Objects.equals(answers, question.answers);
+        return deleted == question.deleted && Objects.equals(id, question.id) && Objects.equals(title, question.title) && Objects.equals(contents, question.contents) && Objects.equals(writer, question.writer) && Objects.equals(answerList, question.answerList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, contents, writer, answers, deleted);
+        return Objects.hash(id, title, contents, writer, answerList, deleted);
     }
-
 
 }

@@ -9,19 +9,17 @@ import java.util.Objects;
 
 public class Answers {
 
-    private Question question;
     private List<Answer> answers;
 
     private Answers() {
     }
 
-    private Answers(Question question, List<Answer> answers) {
-        this.question = question;
+    private Answers(List<Answer> answers) {
         this.answers = answers;
     }
 
-    public static Answers init(Question question) {
-        return new Answers(question, new ArrayList<>());
+    public static Answers init() {
+        return new Answers(new ArrayList<>());
     }
 
     public void add(Answer answer) {
@@ -49,12 +47,12 @@ public class Answers {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answers answers1 = (Answers) o;
-        return Objects.equals(question, answers1.question) && Objects.equals(answers, answers1.answers);
+        return Objects.equals(answers, answers1.answers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(question, answers);
+        return Objects.hash(answers);
     }
 
 }
