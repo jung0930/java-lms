@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DeleteHistories {
+public final class DeleteHistories {
 
     private List<DeleteHistory> deleteHistories;
 
     private DeleteHistories() {
     }
 
-    private DeleteHistories(List<DeleteHistory> deleteHistories) {
+    private DeleteHistories(final List<DeleteHistory> deleteHistories) {
         this.deleteHistories = deleteHistories;
     }
 
@@ -19,15 +19,15 @@ public class DeleteHistories {
         return new DeleteHistories(new ArrayList<>());
     }
 
-    public static DeleteHistories from(List<DeleteHistory> deleteHistories) {
+    public static DeleteHistories from(final List<DeleteHistory> deleteHistories) {
         return new DeleteHistories(deleteHistories);
     }
 
-    public void addDeleteHistory(DeleteHistory deleteHistory) {
+    public void addDeleteHistory(final DeleteHistory deleteHistory) {
         this.deleteHistories.add(deleteHistory);
     }
 
-    public DeleteHistories addDeleteHistorys(DeleteHistories deleteHistorys) {
+    public DeleteHistories addDeleteHistorys(final DeleteHistories deleteHistorys) {
         for (DeleteHistory deleteHistory : deleteHistorys.deleteHistories) {
             this.deleteHistories.add(deleteHistory);
         }

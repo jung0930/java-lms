@@ -6,7 +6,7 @@ import nextstep.users.domain.NsUser;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Question {
+public final class Question {
     private Long id;
 
     private String title;
@@ -26,11 +26,11 @@ public class Question {
     private Question() {
     }
 
-    private Question(NsUser writer, String title, String contents, boolean deleted) {
+    private Question(final NsUser writer, final String title, final String contents, final boolean deleted) {
         this(0L, writer, title, contents, deleted);
     }
 
-    private Question(Long id, NsUser writer, String title, String contents, boolean deleted) {
+    private Question(final Long id, final NsUser writer, final String title, final String contents, final boolean deleted) {
         this.id = id;
         this.writer = writer;
         this.title = title;
@@ -39,11 +39,11 @@ public class Question {
         this.deleted = deleted;
     }
 
-    public static Question write(NsUser writer, String title, String contents) {
+    public static Question write(final NsUser writer, final String title, final String contents) {
         return new Question(writer, title, contents, false);
     }
 
-    public static Question writeOfDeleted(NsUser writer, String title, String contents) {
+    public static Question writeOfDeleted(final NsUser writer, final String title, final String contents) {
         return new Question(writer, title, contents, true);
     }
 
@@ -55,7 +55,7 @@ public class Question {
         return writer;
     }
 
-    public boolean isOwner(NsUser loginUser) {
+    public boolean isOwner(final NsUser loginUser) {
         return writer.equals(loginUser);
     }
 
@@ -67,7 +67,7 @@ public class Question {
         this.deleted = true;
     }
 
-    public DeleteHistories deleteByUser(NsUser user) throws CannotDeleteException {
+    public DeleteHistories deleteByUser(final NsUser user) throws CannotDeleteException {
         DeleteHistories deleteHistories = DeleteHistories.init();
 
         if (!isOwner(user)) {
@@ -81,7 +81,7 @@ public class Question {
         return deleteHistories;
     }
 
-    public void writeAnswer(Answer answer) {
+    public void writeAnswer(final Answer answer) {
         answer.toQuestion(this);
         answers.add(answer);
     }

@@ -8,7 +8,7 @@ import nextstep.users.domain.NsUser;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Answer {
+public final class Answer {
     private Long id;
 
     private NsUser writer;
@@ -26,11 +26,11 @@ public class Answer {
     private Answer() {
     }
 
-    private Answer(NsUser writer, Question question, String contents, boolean deleted) {
+    private Answer(final NsUser writer, final Question question, final String contents, final boolean deleted) {
         this(null, writer, question, contents, deleted);
     }
 
-    private Answer(Long id, NsUser writer, Question question, String contents, boolean deleted) {
+    private Answer(final Long id, final NsUser writer, final Question question, final String contents, final boolean deleted) {
         this.id = id;
         if (writer == null) {
             throw new UnAuthorizedException();
@@ -46,11 +46,11 @@ public class Answer {
         this.deleted = deleted;
     }
 
-    public static Answer write(NsUser writer, Question question, String contents) {
+    public static Answer write(final NsUser writer, final Question question, final String contents) {
         return new Answer(writer, question, contents, false);
     }
 
-    public static Answer writeOfDeleted(NsUser writer, Question question, String contents) {
+    public static Answer writeOfDeleted(final NsUser writer, final Question question, final String contents) {
         return new Answer(writer, question, contents, true);
     }
 
@@ -58,16 +58,11 @@ public class Answer {
         return id;
     }
 
-    public Answer setDeleted(boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
     public boolean isDeleted() {
         return deleted;
     }
 
-    public boolean isOwner(NsUser writer) {
+    public boolean isOwner(final NsUser writer) {
         return this.writer.equals(writer);
     }
 
@@ -79,7 +74,7 @@ public class Answer {
         return contents;
     }
 
-    public void toQuestion(Question question) {
+    public void toQuestion(final Question question) {
         this.question = question;
     }
 
@@ -87,7 +82,7 @@ public class Answer {
         this.deleted = true;
     }
 
-    public DeleteHistory deleteByUser(NsUser user) throws CannotDeleteException {
+    public DeleteHistory deleteByUser(final NsUser user) throws CannotDeleteException {
         if (!isOwner(user)) {
             throw new CannotDeleteException("다른 사람이 쓴 답변이 있어 삭제할 수 없습니다.");
         }

@@ -5,7 +5,7 @@ import nextstep.users.domain.NsUser;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class DeleteHistory {
+public final class DeleteHistory {
     private Long id;
 
     private ContentType contentType;
@@ -19,18 +19,18 @@ public class DeleteHistory {
     private DeleteHistory() {
     }
 
-    private DeleteHistory(ContentType contentType, Long contentId, NsUser deletedBy, LocalDateTime createdDate) {
+    private DeleteHistory(final ContentType contentType, final Long contentId, final NsUser deletedBy, final LocalDateTime createdDate) {
         this.contentType = contentType;
         this.contentId = contentId;
         this.deletedBy = deletedBy;
         this.createdDate = createdDate;
     }
 
-    public static DeleteHistory addQuestionDeleteHistory(Question question, NsUser deletedBy) {
+    public static DeleteHistory addQuestionDeleteHistory(final Question question, final NsUser deletedBy) {
         return new DeleteHistory(ContentType.QUESTION, question.getId(), deletedBy, LocalDateTime.now());
     }
 
-    public static DeleteHistory addAnswerDeleteHistory(Answer answer, NsUser deletedBy) {
+    public static DeleteHistory addAnswerDeleteHistory(final Answer answer, final NsUser deletedBy) {
         return new DeleteHistory(ContentType.ANSWER, answer.getId(), deletedBy, LocalDateTime.now());
     }
 
@@ -50,9 +50,4 @@ public class DeleteHistory {
         return Objects.hash(id, contentType, contentId, deletedBy);
     }
 
-    @Override
-    public String toString() {
-        return "DeleteHistory [id=" + id + ", contentType=" + contentType + ", contentId=" + contentId + ", deletedBy="
-                + deletedBy + ", createdDate=" + createdDate + "]";
-    }
 }
