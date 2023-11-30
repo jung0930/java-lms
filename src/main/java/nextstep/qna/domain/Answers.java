@@ -36,10 +36,14 @@ public class Answers {
         }
     }
 
-    public void deleteByUser(NsUser user) throws CannotDeleteException {
+    public DeleteHistories deleteByUser(NsUser user) throws CannotDeleteException {
+        DeleteHistories deleteHistories = DeleteHistories.init();
+
         for (Answer answer : answers) {
-            answer.deleteByUser(user);
+            deleteHistories.addDeleteHistory(answer.deleteByUser(user));
         }
+
+        return deleteHistories;
     }
 
     @Override

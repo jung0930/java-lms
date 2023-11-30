@@ -30,11 +30,11 @@ public class Question {
     private Question() {
     }
 
-    public Question(NsUser writer, String title, String contents, boolean deleted) {
+    private Question(NsUser writer, String title, String contents, boolean deleted) {
         this(0L, writer, title, contents, deleted);
     }
 
-    public Question(Long id, NsUser writer, String title, String contents, boolean deleted) {
+    private Question(Long id, NsUser writer, String title, String contents, boolean deleted) {
         this.id = id;
         this.writer = writer;
         this.title = title;
@@ -103,12 +103,18 @@ public class Question {
         this.deleted = true;
     }
 
-    public void deleteByUser(NsUser user) throws CannotDeleteException {
+    public DeleteHistories deleteByUser(NsUser user) throws CannotDeleteException {
+        DeleteHistories deleteHistories = DeleteHistories.init();
+
         if (!isOwner(user)) {
             throw new CannotDeleteException("질문을 삭제할 권한이 없습니다.");
         }
         delete();
-        answers.deleteByUser(user);
+        deleteHistories.addDeleteHistory(DeleteHistory.addQuestionDeleteHistory(this, user));
+
+        deleteHistories.addDeleteHistorys(answers.deleteByUser(user));
+
+        return deleteHistories;
     }
 
     public void writeAnswer(Answer answer) {
@@ -118,11 +124,6 @@ public class Question {
     public int sizeOfAnswers() {
         return answers.size();
     }
-
-//    @Override
-//    public String toString() {
-//        return "Question [id=" + getId() + ", title=" + title + ", contents=" + contents + ", writer=" + writer + "]";
-//    }
 
     @Override
     public boolean equals(Object o) {
