@@ -30,6 +30,10 @@ public class DeleteHistory {
         return new DeleteHistory(ContentType.QUESTION, question.getId(), deletedBy, LocalDateTime.now());
     }
 
+    public static DeleteHistory addAnswerDeleteHistory(Answer answer, NsUser deletedBy) {
+        return new DeleteHistory(ContentType.ANSWER, answer.getId(), deletedBy, LocalDateTime.now());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
