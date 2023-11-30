@@ -1,8 +1,8 @@
 package nextstep.qna.service;
 
+import nextstep.qna.domain.*;
 import nextstep.qna.exception.CannotDeleteException;
 import nextstep.qna.exception.NotFoundException;
-import nextstep.qna.domain.*;
 import nextstep.users.domain.NsUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
