@@ -1,5 +1,6 @@
 package nextstep.qna.domain;
 
+import nextstep.qna.TestSetUp;
 import nextstep.qna.exception.CannotDeleteException;
 import nextstep.users.domain.NsUserTest;
 import org.junit.jupiter.api.DisplayName;
@@ -8,9 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class QuestionTest {
-    public static final Question Q1 = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
-    public static final Question Q2 = Question.write(NsUserTest.SANJIGI, "title2", "contents2");
+public class QuestionTest extends TestSetUp {
 
     @Test
     @DisplayName("삭제할 경우 질문의 삭제 상태를 변경")
@@ -36,8 +35,8 @@ public class QuestionTest {
     @Test
     @DisplayName("질문에 답변을 추가할 수 있다.")
     void 질문_답변_추가() {
-        Q2.writeAnswer(AnswerTest.A1);
-        Q2.writeAnswer(AnswerTest.A2);
+        Q2.writeAnswer(A1);
+        Q2.writeAnswer(A2);
 
         assertThat(Q2.sizeOfAnswers()).isEqualTo(2);
     }
@@ -63,6 +62,9 @@ public class QuestionTest {
         Question Q1_1 = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
         Q1_1.writeAnswer(Answer.write(NsUserTest.SANJIGI, Q1_1, "Answers Contents1"));
         Q1_1.writeAnswer(Answer.write(NsUserTest.JAVAJIGI, Q1_1, "Answers Contents2"));
+
+        Q1.writeAnswer(A1);
+        Q1.writeAnswer(A1);
 
         assertThatThrownBy(() -> Q1_1.deleteByUser(NsUserTest.JAVAJIGI))
                 .isInstanceOf(CannotDeleteException.class);

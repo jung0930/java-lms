@@ -35,7 +35,7 @@ public class QnaServiceTest {
     @BeforeEach
     public void setUp() {
         question = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
-        answer = Answer.write(NsUserTest.JAVAJIGI, QuestionTest.Q1, "Answers Contents1");
+        answer = Answer.write(NsUserTest.JAVAJIGI, question, "Answers Contents1");
 
         question.writeAnswer(answer);
     }
