@@ -103,12 +103,18 @@ public class Question {
         this.deleted = true;
     }
 
-    public void deleteByUser(NsUser user) throws CannotDeleteException {
+    public DeleteHistories deleteByUser(NsUser user) throws CannotDeleteException {
+        DeleteHistories deleteHistories = DeleteHistories.init();
+
         if (!isOwner(user)) {
             throw new CannotDeleteException("질문을 삭제할 권한이 없습니다.");
         }
         delete();
-        answers.deleteByUser(user);
+        deleteHistories.addDeleteHistory(DeleteHistory.addQuestionDeleteHistory(this, user));
+
+        deleteHistories.addDeleteHistorys(answers.deleteByUser(user));
+
+        return deleteHistories;
     }
 
     public void writeAnswer(Answer answer) {
