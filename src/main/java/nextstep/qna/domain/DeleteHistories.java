@@ -23,22 +23,23 @@ public final class DeleteHistories {
         return new DeleteHistories(deleteHistories);
     }
 
-    public void addDeleteHistory(final DeleteHistory deleteHistory) {
+    public DeleteHistories addDeleteHistory(final DeleteHistory deleteHistory) {
         this.deleteHistories.add(deleteHistory);
+        return DeleteHistories.from(this.deleteHistories);
     }
 
     public DeleteHistories addDeleteHistorys(final DeleteHistories deleteHistorys) {
         for (DeleteHistory deleteHistory : deleteHistorys.deleteHistories) {
             this.deleteHistories.add(deleteHistory);
         }
-        return this;
+        return DeleteHistories.from(this.deleteHistories);
     }
 
     public int size() {
         return deleteHistories.size();
     }
 
-    public List<DeleteHistory> get() {
+    public List<DeleteHistory> getList() {
         return this.deleteHistories;
     }
 

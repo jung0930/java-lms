@@ -40,7 +40,7 @@ public class Answers {
         DeleteHistories deleteHistories = DeleteHistories.init();
 
         for (Answer answer : answers) {
-            deleteHistories.addDeleteHistory(answer.deleteByUser(user));
+            deleteHistories = deleteHistories.addDeleteHistory(answer.deleteByUser(user));
         }
 
         return deleteHistories;

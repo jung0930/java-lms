@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public final class DeleteHistory {
+
     private Long id;
 
     private ContentType contentType;

@@ -91,11 +91,6 @@ public final class Answer {
         return DeleteHistory.addAnswerDeleteHistory(this, user);
     }
 
-//    @Override
-//    public String toString() {
-//        return "Answer [id=" + getId() + ", writer=" + writer + ", contents=" + contents + "]";
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

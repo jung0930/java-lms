@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public final class Question {
+
     private Long id;
 
     private String title;
@@ -75,7 +76,7 @@ public final class Question {
         }
 
         delete();
-        deleteHistories.addDeleteHistory(DeleteHistory.addQuestionDeleteHistory(this, user));
+        deleteHistories = deleteHistories.addDeleteHistory(DeleteHistory.addQuestionDeleteHistory(this, user));
         deleteHistories.addDeleteHistorys(answers.deleteByUser(user));
 
         return deleteHistories;
