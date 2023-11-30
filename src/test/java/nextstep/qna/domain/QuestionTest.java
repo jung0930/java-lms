@@ -20,7 +20,7 @@ public class QuestionTest extends TestSetUp {
 
     @Test
     @DisplayName("로그인 사용자와 질문자가 같은 경우 삭제 가능하다.")
-    void 로그인_사용자와_질문자가_같은_경우_삭제_가능() throws CannotDeleteException {
+    void 로그인_사용자와_질문자가_같은_경우_삭제_가능() {
         Q1.deleteByUser(NsUserTest.JAVAJIGI);
         assertThat(Q1.isDeleted()).isTrue();
     }
@@ -43,7 +43,7 @@ public class QuestionTest extends TestSetUp {
 
     @Test
     @DisplayName("답변이 있을 경우 질문자와 답변글의 모든 답변자가 같으면 질문과 답변의 삭제 상태를 변경한다.")
-    void 질문자와_답변자가_같으면_질문과_답변_삭제_상태_변경() throws CannotDeleteException {
+    void 질문자와_답변자가_같으면_질문과_답변_삭제_상태_변경() {
         Question Q1_1 = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
         Q1_1.writeAnswer(Answer.write(NsUserTest.JAVAJIGI, Q1_1, "Answers Contents1"));
         Q1_1.writeAnswer(Answer.write(NsUserTest.JAVAJIGI, Q1_1, "Answers Contents2"));

@@ -1,6 +1,5 @@
 package nextstep.qna.domain;
 
-import nextstep.qna.exception.CannotDeleteException;
 import nextstep.users.domain.NsUser;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class Answers {
         }
     }
 
-    public DeleteHistories deleteByUser(NsUser user) throws CannotDeleteException {
+    public DeleteHistories deleteByUser(NsUser user) {
         DeleteHistories deleteHistories = DeleteHistories.init();
 
         for (Answer answer : answers) {

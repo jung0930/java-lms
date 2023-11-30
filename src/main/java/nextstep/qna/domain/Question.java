@@ -68,7 +68,7 @@ public final class Question {
         this.deleted = true;
     }
 
-    public DeleteHistories deleteByUser(final NsUser user) throws CannotDeleteException {
+    public DeleteHistories deleteByUser(final NsUser user) {
         DeleteHistories deleteHistories = DeleteHistories.init();
 
         if (!isOwner(user)) {

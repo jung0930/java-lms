@@ -40,7 +40,7 @@ class AnswersTest extends TestSetUp {
 
     @Test
     @DisplayName("질문자와 답변자가 같은 경우 답변의 삭제 상태를 변경한다.")
-    void 질문자와_답변자가_같은_경우_답변들의_답변_상태_변경() throws CannotDeleteException {
+    void 질문자와_답변자가_같은_경우_답변들의_답변_상태_변경() {
         Answers answers = Answers.init();
         answers.add(A1);
 

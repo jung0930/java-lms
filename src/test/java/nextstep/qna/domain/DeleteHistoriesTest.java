@@ -1,6 +1,5 @@
 package nextstep.qna.domain;
 
-import nextstep.qna.exception.CannotDeleteException;
 import nextstep.users.domain.NsUserTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ class DeleteHistoriesTest {
 
     @Test
     @DisplayName("질문과 답변 삭제 이력을 객체로 저장한다.")
-    void 질문과_답변_삭제_이력을_객체로_저장() throws CannotDeleteException {
+    void 질문과_답변_삭제_이력을_객체로_저장() {
         Question Q1 = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
         Answer A1 = Answer.write(NsUserTest.JAVAJIGI, Q1, "Answers Contents1");
         Answer A2 = Answer.write(NsUserTest.JAVAJIGI, Q1, "Answers Contents2");

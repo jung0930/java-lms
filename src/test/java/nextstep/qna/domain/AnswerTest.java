@@ -21,7 +21,7 @@ public class AnswerTest extends TestSetUp {
 
     @Test
     @DisplayName("질문자와 답변자가 같은 경우 삭제가 가능하다.")
-    void 질문자와_답변자가_같으면_답변_삭제() throws CannotDeleteException {
+    void 질문자와_답변자가_같으면_답변_삭제() {
         A1.deleteByUser(NsUserTest.JAVAJIGI);
 
         assertThat(A1.isDeleted()).isTrue();
