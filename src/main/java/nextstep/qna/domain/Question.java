@@ -30,20 +30,25 @@ public class Question {
     private Question() {
     }
 
-    private Question(NsUser writer, String title, String contents) {
-        this(0L, writer, title, contents);
+    public Question(NsUser writer, String title, String contents, boolean deleted) {
+        this(0L, writer, title, contents, deleted);
     }
 
-    public Question(Long id, NsUser writer, String title, String contents) {
+    public Question(Long id, NsUser writer, String title, String contents, boolean deleted) {
         this.id = id;
         this.writer = writer;
         this.title = title;
         this.contents = contents;
         this.answers = Answers.init();
+        this.deleted = deleted;
     }
 
-    public static Question of(NsUser writer, String title, String contents) {
-        return new Question(writer, title, contents);
+    public static Question write(NsUser writer, String title, String contents) {
+        return new Question(writer, title, contents, false);
+    }
+
+    public static Question writeOfDeleted(NsUser writer, String title, String contents) {
+        return new Question(writer, title, contents, true);
     }
 
     public Long getId() {
@@ -98,11 +103,12 @@ public class Question {
         this.deleted = true;
     }
 
-    public void deleteBy(NsUser user) throws CannotDeleteException {
+    public void deleteByUser(NsUser user) throws CannotDeleteException {
         if (!isOwner(user)) {
             throw new CannotDeleteException("질문을 삭제할 권한이 없습니다.");
         }
         delete();
+        answers.deleteByUser(user);
     }
 
     public void writeAnswer(Answer answer) {
@@ -113,22 +119,22 @@ public class Question {
         return answers.size();
     }
 
-    @Override
-    public String toString() {
-        return "Question [id=" + getId() + ", title=" + title + ", contents=" + contents + ", writer=" + writer + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "Question [id=" + getId() + ", title=" + title + ", contents=" + contents + ", writer=" + writer + "]";
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
-        return deleted == question.deleted && Objects.equals(id, question.id) && Objects.equals(title, question.title) && Objects.equals(contents, question.contents) && Objects.equals(writer, question.writer) && Objects.equals(answerList, question.answerList);
+        return deleted == question.deleted && Objects.equals(id, question.id) && Objects.equals(title, question.title) && Objects.equals(contents, question.contents) && Objects.equals(writer, question.writer) && Objects.equals(answers, question.answers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, contents, writer, answerList, deleted);
+        return Objects.hash(id, title, contents, writer, answers, deleted);
     }
 
 }

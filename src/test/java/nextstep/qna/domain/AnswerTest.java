@@ -9,8 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AnswerTest {
-    public static final Answer A1 = Answer.of(NsUserTest.JAVAJIGI, QuestionTest.Q1, "Answers Contents1");
-    public static final Answer A2 = Answer.of(NsUserTest.SANJIGI, QuestionTest.Q1, "Answers Contents2");
+    public static final Answer A1 = Answer.write(NsUserTest.JAVAJIGI, QuestionTest.Q1, "Answers Contents1");
+    public static final Answer A2 = Answer.write(NsUserTest.SANJIGI, QuestionTest.Q1, "Answers Contents2");
 
     @Test
     @DisplayName("삭제를 할 경우 답변의 삭제 상태를 변경한다.")
@@ -22,8 +22,8 @@ public class AnswerTest {
     @Test
     @DisplayName("질문자와 답변자가 같은 경우 삭제가 가능하다.")
     void 질문자와_답변자가_같으면_답변_삭제() throws CannotDeleteException {
-        Question question = Question.of(NsUserTest.JAVAJIGI, "title1", "contents1");
-        Answer answer = Answer.of(NsUserTest.JAVAJIGI, question, "Answers Contents1");
+        Question question = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
+        Answer answer = Answer.write(NsUserTest.JAVAJIGI, question, "Answers Contents1");
 
         answer.deleteByUser(NsUserTest.JAVAJIGI);
         assertThat(answer.isDeleted()).isTrue();
@@ -32,8 +32,8 @@ public class AnswerTest {
     @Test
     @DisplayName("질문자와 답변자가 다른 경우 예외를 반환한다.")
     void 질문자와_답변자가_다르면_예외반환() {
-        Question question = Question.of(NsUserTest.JAVAJIGI, "title1", "contents1");
-        Answer answer = Answer.of(NsUserTest.JAVAJIGI, question, "Answers Contents1");
+        Question question = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
+        Answer answer = Answer.write(NsUserTest.JAVAJIGI, question, "Answers Contents1");
 
         assertThatThrownBy(() -> answer.deleteByUser(NsUserTest.SANJIGI))
                 .isInstanceOf(CannotDeleteException.class);

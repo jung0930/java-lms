@@ -26,11 +26,11 @@ public class Answer {
     private Answer() {
     }
 
-    private Answer(NsUser writer, Question question, String contents) {
-        this(null, writer, question, contents);
+    private Answer(NsUser writer, Question question, String contents, boolean deleted) {
+        this(null, writer, question, contents, deleted);
     }
 
-    public Answer(Long id, NsUser writer, Question question, String contents) {
+    public Answer(Long id, NsUser writer, Question question, String contents, boolean deleted) {
         this.id = id;
         if (writer == null) {
             throw new UnAuthorizedException();
@@ -43,10 +43,15 @@ public class Answer {
         this.writer = writer;
         this.question = question;
         this.contents = contents;
+        this.deleted = deleted;
     }
 
-    public static Answer of(NsUser writer, Question question, String contents) {
-        return new Answer(writer, question, contents);
+    public static Answer write(NsUser writer, Question question, String contents) {
+        return new Answer(writer, question, contents, false);
+    }
+
+    public static Answer writeOfDeleted(NsUser writer, Question question, String contents) {
+        return new Answer(writer, question, contents, true);
     }
 
     public Long getId() {
@@ -89,22 +94,22 @@ public class Answer {
         delete();
     }
 
-    @Override
-    public String toString() {
-        return "Answer [id=" + getId() + ", writer=" + writer + ", contents=" + contents + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "Answer [id=" + getId() + ", writer=" + writer + ", contents=" + contents + "]";
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer answer = (Answer) o;
-        return deleted == answer.deleted && Objects.equals(id, answer.id) && Objects.equals(writer, answer.writer) && Objects.equals(question, answer.question) && Objects.equals(contents, answer.contents);
+        return deleted == answer.deleted && Objects.equals(id, answer.id) && Objects.equals(writer, answer.writer) && Objects.equals(contents, answer.contents);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, writer, question, contents, deleted);
+        return Objects.hash(id, writer, contents, deleted);
     }
 
 }
