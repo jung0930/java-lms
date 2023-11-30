@@ -59,7 +59,7 @@ public class QuestionTest {
 
     @Test
     @DisplayName("답변이 있는 질문 삭제 시 질문자와 답변글의 모든 답변자가 같지 않은 경우 예외를 반환한다.")
-    void 질문자와_답변자가_다른_경우_예외_반환() throws CannotDeleteException {
+    void 질문자와_답변자가_다른_경우_예외_반환() {
         Question Q1_1 = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
         Q1_1.writeAnswer(Answer.write(NsUserTest.SANJIGI, Q1_1, "Answers Contents1"));
         Q1_1.writeAnswer(Answer.write(NsUserTest.JAVAJIGI, Q1_1, "Answers Contents2"));

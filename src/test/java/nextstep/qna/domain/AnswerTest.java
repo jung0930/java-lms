@@ -35,7 +35,8 @@ public class AnswerTest {
         Question question = Question.write(NsUserTest.JAVAJIGI, "title1", "contents1");
         Answer answer = Answer.write(NsUserTest.JAVAJIGI, question, "Answers Contents1");
 
-        assertThatThrownBy(() -> answer.deleteByUser(NsUserTest.SANJIGI)).isInstanceOf(CannotDeleteException.class);
+        assertThatThrownBy(() -> answer.deleteByUser(NsUserTest.SANJIGI))
+                .isInstanceOf(CannotDeleteException.class);
     }
 
 }
